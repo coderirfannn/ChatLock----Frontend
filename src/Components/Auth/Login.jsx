@@ -22,241 +22,272 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   return (
-    <div className="login-bg">
-      <div className="login-main">
+    <div className="login-container">
+      <div className="login-card">
         <h1 className="login-title">ChatLock</h1>
-        <h2 className="login-welcome">Welcome back</h2>
-        <div className="login-subtext">Sign in to your account to continue</div>
-        <form className="login-form" autoComplete="on">
-          <div className="login-field">
-            <label htmlFor="email" className="login-label">Email</label>
+        <h2 className="login-subtitle">Welcome back</h2>
+        <p className="login-description">Sign in to your account to continue</p>
+        
+        <form className="login-form">
+          <div className="form-group">
+            <label htmlFor="email" className="form-label">Email</label>
             <input
-              className="login-input"
               id="email"
               type="email"
+              className="form-input"
               placeholder="name@example.com"
-              autoComplete="username"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="username"
             />
           </div>
-          <div className="login-field">
-            <div className="login-label-row">
-              <label htmlFor="password" className="login-label">Password</label>
-              <a className="login-forgot" href="#">Forgot password?</a>
+          
+          <div className="form-group">
+            <div className="password-label-row">
+              <label htmlFor="password" className="form-label">Password</label>
+              <a href="#" className="forgot-password">Forgot password?</a>
             </div>
             <input
-              className="login-input"
               id="password"
               type="password"
-              autoComplete="current-password"
+              className="form-input"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
             />
           </div>
-          <button className="login-btn" type="submit">Sign In</button>
+          
+          <button type="submit" className="login-button">Sign In</button>
         </form>
-        <div className="login-or">
-          <div className="login-or-line" />
-          <span className="login-or-text">OR CONTINUE WITH</span>
-          <div className="login-or-line" />
+        
+        <div className="divider">
+          <span className="divider-text">OR CONTINUE WITH</span>
         </div>
-        <div className="login-social-row">
-          <button className="login-social-btn">
+        
+        <div className="social-buttons">
+          <button type="button" className="social-button">
             <GoogleIcon />
-            Google
+            <span>Google</span>
           </button>
-          <button className="login-social-btn">
+          <button type="button" className="social-button">
             <GitHubIcon />
-            GitHub
+            <span>GitHub</span>
           </button>
         </div>
-        <div className="login-signup">
-          Don't have an account?
-          <a className="login-signup-link" href="#">Sign up</a>
-        </div>
+        
+        <p className="signup-text">
+          Don't have an account? <a href="#" className="signup-link">Sign up</a>
+        </p>
       </div>
-      <style>{`
-        .login-bg {
+
+      <style jsx>{`
+        .login-container {
           min-height: 100vh;
-          width: 100vw;
-          background: linear-gradient(180deg, #f7ecfc 0%, #fff 100%);
           display: flex;
-          flex-direction: column;
+          justify-content: center;
           align-items: center;
-          justify-content: flex-start;
-          font-family: 'Inter', Arial, sans-serif;
+          padding: 1rem;
+          background: linear-gradient(135deg, #f9f3ff 0%, #ffffff 100%);
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-        .login-main {
-          margin: 60px auto 0 auto;
+        
+        .login-card {
           width: 100%;
-          max-width: 450px;
-          background: rgba(255,255,255,0.86);
-          border-radius: 18px;
-          box-shadow: 0 6px 32px 0 rgba(80, 44, 136, 0.09);
-          padding: 44px 38px 32px 38px;
-          display: flex;
-          flex-direction: column;
-          align-items: stretch;
+          max-width: 28rem;
+          background: white;
+          border-radius: 1rem;
+          padding: 2.5rem;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
         }
+        
         .login-title {
-          color: #8d39d6;
-          font-size: 2.5rem;
-          font-weight: 700;
-          margin-bottom: 0.1em;
-          text-align: center;
-          letter-spacing: -1px;
-        }
-        .login-welcome {
-          color: #18181b;
+          color: #7c3aed;
           font-size: 2rem;
           font-weight: 700;
-          margin: 0 0 0.25em 0;
           text-align: center;
+          margin-bottom: 0.5rem;
         }
-        .login-subtext {
+        
+        .login-subtitle {
+          color: #18181b;
+          font-size: 1.5rem;
+          font-weight: 600;
+          text-align: center;
+          margin-bottom: 0.25rem;
+        }
+        
+        .login-description {
           color: #6b7280;
-          font-size: 1.12rem;
-          margin-bottom: 2.3em;
+          font-size: 1rem;
           text-align: center;
-          font-weight: 400;
+          margin-bottom: 2rem;
         }
+        
         .login-form {
           display: flex;
           flex-direction: column;
-          gap: 1.1em;
+          gap: 1.25rem;
         }
-        .login-field {
+        
+        .form-group {
           display: flex;
           flex-direction: column;
+          gap: 0.5rem;
         }
-        .login-label-row {
+        
+        .form-label {
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: #374151;
+        }
+        
+        .password-label-row {
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
-        .login-label {
-          font-weight: 600;
-          font-size: 1.04rem;
-          color: #18181b;
-          margin-bottom: 0.15em;
-        }
-        .login-forgot {
-          color: #a259e9;
-          font-size: 1.01rem;
+        
+        .forgot-password {
+          font-size: 0.875rem;
+          color: #8b5cf6;
           text-decoration: none;
           font-weight: 500;
-          transition: text-decoration 0.2s, color 0.2s;
+          transition: color 0.2s;
         }
-        .login-forgot:hover {
-          text-decoration: underline;
+        
+        .forgot-password:hover {
           color: #7c3aed;
+          text-decoration: underline;
         }
-        .login-input {
-          width: 100%;
-          padding: 13px 14px;
-          border-radius: 6px;
-          border: 1.5px solid #e5e7eb;
-          font-size: 1.08rem;
+        
+        .form-input {
+          padding: 0.75rem 1rem;
+          border: 1px solid #e5e7eb;
+          border-radius: 0.5rem;
+          font-size: 1rem;
+          transition: all 0.2s;
+        }
+        
+        .form-input:focus {
           outline: none;
-          margin-bottom: 0.1em;
-          background: #fff;
-          transition: border 0.2s, box-shadow 0.2s;
-          box-sizing: border-box;
+          border-color: #8b5cf6;
+          box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
         }
-        .login-input:focus {
-          border: 1.5px solid #a259e9;
-          box-shadow: 0 0 0 2px #e9d5ff;
-        }
-        .login-btn {
-          width: 100%;
-          background: linear-gradient(90deg, #a259e9 10%, #7c3aed 90%);
-          color: #fff;
-          font-weight: 600;
-          font-size: 1.13rem;
-          padding: 13px 0;
+        
+        .login-button {
+          background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 100%);
+          color: white;
+          padding: 0.75rem;
           border: none;
-          border-radius: 8px;
-          margin-top: 0.7em;
+          border-radius: 0.5rem;
+          font-size: 1rem;
+          font-weight: 600;
           cursor: pointer;
-          box-shadow: 0 2px 12px 0 rgba(162,89,233,0.08);
-          transition: background 0.2s, transform 0.1s;
+          transition: all 0.2s;
+          margin-top: 0.5rem;
         }
-        .login-btn:hover {
-          background: linear-gradient(90deg, #7c3aed 10%, #a259e9 90%);
-          transform: translateY(-2px) scale(1.01);
+        
+        .login-button:hover {
+          background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
         }
-        .login-or {
+        
+        .divider {
           display: flex;
           align-items: center;
-          margin: 2em 0 1.3em 0;
+          margin: 1.5rem 0;
+          color: #9ca3af;
+          font-size: 0.875rem;
         }
-        .login-or-line {
+        
+        .divider::before,
+        .divider::after {
+          content: "";
           flex: 1;
           height: 1px;
-          background: #ececec;
+          background: #e5e7eb;
         }
-        .login-or-text {
-          margin: 0 12px;
-          color: #888;
-          font-size: 1.01rem;
-          font-weight: 500;
-          letter-spacing: 0.04em;
-          white-space: nowrap;
+        
+        .divider-text {
+          padding: 0 1rem;
         }
-        .login-social-row {
+        
+        .social-buttons {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
-          width: 100%;
-          margin-bottom: 1.7em;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+          margin-bottom: 1.5rem;
         }
-        .login-social-btn {
+        
+        .social-button {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 10px;
-          border: 1.5px solid #e5e7eb;
-          border-radius: 8px;
-          background: #fff;
-          padding: 10px 0;
-          font-weight: 500;
-          font-size: 1.07rem;
+          gap: 0.5rem;
+          padding: 0.75rem;
+          border: 1px solid #e5e7eb;
+          border-radius: 0.5rem;
+          background: white;
           cursor: pointer;
-          transition: border 0.2s, box-shadow 0.2s;
-          box-shadow: 0 2px 8px 0 rgba(80, 44, 136, 0.03);
-        }
-        .login-social-btn:hover {
-          border: 1.5px solid #a259e9;
-          box-shadow: 0 4px 16px 0 rgba(162,89,233,0.09);
-        }
-        .login-signup {
-          color: #888;
-          font-size: 1.08rem;
-          margin-top: 1.7em;
-          text-align: center;
-        }
-        .login-signup-link {
-          color: #a259e9;
-          margin-left: 4px;
-          text-decoration: none;
+          transition: all 0.2s;
+          font-size: 0.875rem;
           font-weight: 500;
-          transition: text-decoration 0.2s, color 0.2s;
         }
-        .login-signup-link:hover {
-          text-decoration: underline;
+        
+        .social-button:hover {
+          border-color: #d1d5db;
+          background: #f9fafb;
+        }
+        
+        .signup-text {
+          text-align: center;
+          color: #6b7280;
+          font-size: 0.875rem;
+        }
+        
+        .signup-link {
+          color: #8b5cf6;
+          font-weight: 500;
+          text-decoration: none;
+          transition: color 0.2s;
+        }
+        
+        .signup-link:hover {
           color: #7c3aed;
+          text-decoration: underline;
         }
-        @media (max-width: 540px) {
-          .login-main {
-            padding: 28px 8vw 26px 8vw;
-            max-width: 98vw;
+        
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+          .login-card {
+            padding: 1.5rem;
+            max-width: 100%;
           }
-          .login-form {
-            width: 100%;
+          
+          .social-buttons {
+            grid-template-columns: 1fr;
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .login-container {
+            padding: 1rem;
+          }
+        }
+        
+        @media (min-width: 1024px) {
+          .login-card {
+            padding: 3rem;
           }
         }
       `}</style>
     </div>
   );
 }
+
+
+
+
+
+
