@@ -21,7 +21,7 @@ function AuthMain() {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      navigate("/feed"); 
+      navigate("/signin"); 
     }, 1500);
   };
 

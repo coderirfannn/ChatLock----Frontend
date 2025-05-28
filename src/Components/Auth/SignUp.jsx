@@ -22,7 +22,7 @@ const SignUp = () => {
     if (formData.agree) {
       // Replace with your signup logic
       console.log(formData);
-      navigate('/dashboard');
+      navigate('/signin'); // jab button pe click hoga toh sigin page pe jayega..
     } else {
       alert('You must agree to the terms first.');
     }
@@ -126,7 +126,7 @@ const SignUp = () => {
 
         <p className="text-center text-sm mt-6">
           Already have an account?{' '}
-          <a href="/" className="text-purple-600 font-medium hover:underline">
+          <a href="/signin" className="text-purple-600 font-medium hover:underline">
             Sign in
           </a>
         </p>
