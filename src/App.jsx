@@ -3,10 +3,10 @@ import './App.css';
 
 // import Feed from './Components/Feed/Feed';
 // import ProtectedRoute from './Components/Auth/ProtectedRoute';
-import NotFound from './Components/Common/NotFound';
-import Login from './Components/Auth/Login';
-import AuthMain from './Components/Auth/AuthMain';
-import SignUp from './Components/Auth/SignUp';
+import NotFound from './components/Common/NotFound';
+import Login from './components/Auth/Login';
+import AuthMain from './components/Auth/AuthMain';
+import SignUp from './components/Auth/SignUp';
 
 function App() {
   return (
