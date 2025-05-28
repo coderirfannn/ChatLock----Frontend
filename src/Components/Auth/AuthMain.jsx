@@ -99,7 +99,7 @@ function AuthMain() {
             {isLoading ? (
               <div className="flex items-center gap-2">
                 <Loading size="small" />
-                <span>Authenticating...</span>
+                <span>Authenticating....</span>
               </div>
             ) : (
               'Sign In'
