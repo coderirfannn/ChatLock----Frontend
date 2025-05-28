@@ -86,7 +86,7 @@ const SignUp = () => {
               required
             />
             <label>
-              I agre to the{' '}
+              I agree to the{' '}
               <a href="#" className="text-purple-600 underline">
                 terms of service
               </a>{' '}
