@@ -1,9 +1,9 @@
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Eye, EyeOff, AlertCircle, Github } from 'lucide-react';
+import Loading from '../Loding';
 
- import React, { useState } from 'react';
-
-import { useNavigate } from 'react-router-dom';
-
-const SignUp = () => {
+export default function SignUp() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: '',
@@ -12,6 +12,10 @@ const SignUp = () => {
     agree: false
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({ ...formData, [name]: type === 'checkbox' ? checked : value });
@@ -19,124 +23,168 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData.agree) {
-      // Replace with your signup logic
-      console.log(formData);
-      navigate('/signin'); // jab button pe click hoga toh sigin page pe jayega..
-    } else {
-      alert('You must agree to the terms first.');
+    setError('');
+
+    if (!formData.agree) {
+      setError('You must agree to the terms first.');
+      return;
     }
+
+    setIsSubmitting(true);
+
+    setTimeout(() => {
+      console.log(formData);
+      setIsSubmitting(false);
+      navigate('/signin');
+    }, 1500);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-purple-50 to-white px-4">
-      <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-md">
-        <div className='font-serif font-bold tracking-tight bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent'>
-        <h1 className="text-3xl font-bold text-center ">ChatLock</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-purple-100 to-white px-4 py-8">
+      <div className="w-full max-w-md bg-white shadow-md rounded-xl p-5 space-y-5 relative">
+        <div className="text-center space-y-3">
+          <Link to="/" className="inline-block">
+            <h2 className="text-2xl font-bold text-purple-900">ChatLock</h2>
+          </Link>
+          <h3 className="text-lg font-semibold">Create an account</h3>
+          <p className="text-sm text-gray-500">Sign up to get started</p>
         </div>
-        <h2 className="text-xl font-semibold text-center mt-2">Create an account</h2>
-        <p className="text-sm text-gray-500 text-center mb-6">Sign up to get started with ChatLock</p>
+
+        {error && (
+          <div className="flex items-center gap-2 bg-red-100 text-red-800 p-2 rounded-md text-xs">
+            <AlertCircle className="w-4 h-4" />
+            <span>{error}</span>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium">Full Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
             <input
               type="text"
               name="fullName"
               value={formData.fullName}
               onChange={handleChange}
-              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-purple-500 text-sm"
               placeholder="John Doe"
               required
+              disabled={isSubmitting}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium">Email</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-purple-500 text-sm"
               placeholder="name@example.com"
               required
+              disabled={isSubmitting}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
-              placeholder="••••••••"
-              required
-            />
+            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full p-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-purple-500 text-sm"
+                placeholder="••••••••"
+                required
+                disabled={isSubmitting}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-2 right-2 text-gray-500 hover:text-purple-600"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
             <p className="text-xs text-gray-500 mt-1">
-              Must be at least 8 characters with a number and a special character
+              Use at least 8 characters including a number & special character.
             </p>
           </div>
 
-          <div className="flex items-center space-x-2 text-sm">
+          <div className="flex items-start gap-2">
             <input
               type="checkbox"
               name="agree"
+              id="agree"
               checked={formData.agree}
               onChange={handleChange}
-              className="accent-purple-600"
+              className="accent-purple-600 mt-1"
+              disabled={isSubmitting}
               required
             />
-            <label>
-              I agree to the{' '}
-              <a href="#" className="text-purple-600 underline">
-                terms of service
-              </a>{' '}
-              and{' '}
-              <a href="#" className="text-purple-600 underline">
-                privacy policy
-              </a>
+            <label htmlFor="agree" className="text-xs text-gray-700 cursor-pointer">
+              I agree to the{" "}
+              <a href="#" className="text-purple-600 underline">terms</a> and{" "}
+              <a href="#" className="text-purple-600 underline">privacy policy</a>.
             </label>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-purple-600 text-white py-2 rounded-md font-semibold hover:bg-purple-700 transition"
+            disabled={isSubmitting}
+            className="w-full bg-purple-600 hover:bg-purple-700 text-white p-2 rounded-md flex items-center justify-center transition-colors duration-200 text-sm"
           >
-            Create Account
+            {isSubmitting ? (
+              <>
+                <Loading className="w-4 h-4 mr-2" />
+                Creating account...
+              </>
+            ) : (
+              'Create Account'
+            )}
           </button>
         </form>
 
-        <div className="my-6 flex items-center justify-center text-sm text-gray-400">
-          <hr className="w-full border-gray-300" />
-          <span className="px-4">OR CONTINUE WITH</span>
-          <hr className="w-full border-gray-300" />
+        {/* Divider */}
+        <div className="flex items-center gap-2">
+          <div className="flex-1 h-px bg-gray-300" />
+          <span className="text-xs text-gray-500">Or continue with</span>
+          <div className="flex-1 h-px bg-gray-300" />
         </div>
 
-        <div className="flex justify-between gap-4">
-          <button className="flex-1 flex items-center justify-center gap-2 border border-gray-300 py-2 rounded-md hover:bg-gray-50 transition">
-            <img src="https://img.icons8.com/color/24/google-logo.png" alt="Google" />
-            Google
+        {/* OAuth Buttons */}
+        <div className="grid grid-cols-2 gap-3">
+          <button
+            disabled={isSubmitting}
+            onClick={() => {}}
+            className="flex items-center justify-center border border-gray-300 rounded-md p-2 hover:bg-gray-50 text-sm"
+          >
+            <img src="https://img.icons8.com/color/24/google-logo.png" alt="Google" className="w-4 h-4" />
+            <span className="ml-2">Google</span>
           </button>
-          <button className="flex-1 flex items-center justify-center gap-2 border border-gray-300 py-2 rounded-md hover:bg-gray-50 transition">
-            <img src="https://img.icons8.com/ios-glyphs/24/github.png" alt="GitHub" />
-            GitHub
+
+          <button
+            disabled={isSubmitting}
+            onClick={() => {}}
+            className="flex items-center justify-center border border-gray-300 rounded-md p-2 hover:bg-gray-50 text-sm"
+          >
+            <Github className="w-4 h-4" />
+            <span className="ml-2">GitHub</span>
           </button>
         </div>
 
-        <p className="text-center text-sm mt-6">
-          Already have an account?{' '}
-          <a href="/signin" className="text-purple-600 font-medium hover:underline">
-            Sign in
-          </a>
-        </p>
+        {/* Footer */}
+        <div className="text-center text-xs mt-4">
+          <p className="text-gray-500">
+            Already have an account?{" "}
+            <Link to="/signin" className="font-medium text-purple-600 hover:text-purple-500">
+              Sign in
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
-};
-
-
-export default SignUp;
-
+}

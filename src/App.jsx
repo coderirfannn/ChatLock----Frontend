@@ -4,10 +4,11 @@ import './App.css';
 // import Feed from './Components/Feed/Feed';
 // import ProtectedRoute from './Components/Auth/ProtectedRoute';
 import NotFound from './components/Common/NotFound';
-import Login from './components/Auth/Login';
 import AuthMain from './components/Auth/AuthMain';
 import SignUp from './components/Auth/SignUp';
 import Feed from './pages/Feed';
+import { LogIn } from 'lucide-react';
+import Login from './Components/Auth/Login';
 
 function App() {
   return (
