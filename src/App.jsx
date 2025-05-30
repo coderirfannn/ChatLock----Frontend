@@ -7,6 +7,7 @@ import NotFound from './components/Common/NotFound';
 import Login from './components/Auth/Login';
 import AuthMain from './components/Auth/AuthMain';
 import SignUp from './components/Auth/SignUp';
+import Feed from './pages/Feed';
 
 function App() {
   return (
@@ -17,18 +18,7 @@ function App() {
           <Route path="/" element={<AuthMain />} />
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          
-          {/* Protected Routes */}
-          {/* <Route 
-            path="/feed" 
-            element={
-              
-                // <Feed />
-          
-            } 
-          /> */}
-          
-          {/* 404 Not Found */}
+          <Route path="/feed" element={<Feed />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
