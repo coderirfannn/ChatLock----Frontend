@@ -106,23 +106,23 @@ function Header() {
 
           {/* Logo */}
           <div className="flex items-center flex-1 sm:flex-none">
-            <Link 
-              to="/feed" 
+            <Link
+              to="/feed"
               className="flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 rounded-md"
             >
-              <motion.div 
+              <motion.div
                 className="w-8 h-8 bg-gradient-to-r  from-purple-600 to-pink-500  rounded-lg flex items-center justify-center"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <span className="text-white font-bold text-sm">CL</span>
               </motion.div>
-              <motion.span 
+              <motion.span
                 className="text-xl font-bold  hidden sm:inline "
                 whileHover={{ scale: 1.02 }}
               >
                 <div className='text-2xl font-serif font-bold tracking-tight bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent'>ChatLock</div>
-                
+
               </motion.span>
             </Link>
           </div>
@@ -132,7 +132,7 @@ function Header() {
             ref={searchRef}
             className={`${isSearchFocused ? 'absolute inset-x-0 mx-4 z-50' : 'hidden'} sm:flex-1 sm:max-w-lg sm:mx-8 sm:relative`}
           >
-            <motion.div 
+            <motion.div
               className="relative"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -192,7 +192,7 @@ function Header() {
                   className="h-full w-full object-cover"
                 />
               </button>
-              
+
               <AnimatePresence>
                 {isProfileMenuOpen && (
                   <motion.div
