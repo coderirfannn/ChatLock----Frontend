@@ -31,7 +31,9 @@ const SignUp = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-purple-50 to-white px-4">
       <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-md">
-        <h1 className="text-3xl font-bold text-center text-purple-700">ChatLock</h1>
+        <div className='font-serif font-bold tracking-tight bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent'>
+        <h1 className="text-3xl font-bold text-center ">ChatLock</h1>
+        </div>
         <h2 className="text-xl font-semibold text-center mt-2">Create an account</h2>
         <p className="text-sm text-gray-500 text-center mb-6">Sign up to get started with ChatLock</p>
 

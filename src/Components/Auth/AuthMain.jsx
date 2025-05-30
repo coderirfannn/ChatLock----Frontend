@@ -73,7 +73,7 @@ function AuthMain() {
             <motion.h1 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="text-5xl font-bold tracking-tight bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent"
+              className="text-5xl font-serif font-bold tracking-tight bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent"
             >
               ChatLock
             </motion.h1>
