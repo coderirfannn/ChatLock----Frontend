@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 
 // import Feed from './Components/Feed/Feed';
@@ -9,20 +9,48 @@ import SignUp from './components/Auth/SignUp';
 import Feed from './pages/Feed';
 import { LogIn } from 'lucide-react';
 import Login from './Components/Auth/Login';
+import MainLayout from './pages/MainLayout';
+import { Home } from './pages/Home';
+
+const BrowserRouter = createBrowserRouter([
+  {
+    path:'/',
+    element:<MainLayout></MainLayout>,
+    children:[
+      {
+        path:'/',
+        element:<Home></Home>
+      }
+    ]
+  },
+     {
+    path:'/auth',
+    element:<AuthMain></AuthMain>
+   },
+   {
+    path:'/signin',
+    element:<Login></Login>
+   },
+   {
+    path:'/signup',
+    element:<SignUp></SignUp>
+   }
+])
 
 function App() {
   return (
     <div className="App">
-      <Router>
+      {/* <Router>
         <Routes>
-          {/* Public Routes */}
           <Route path="/" element={<AuthMain />} />
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </Router>
+      </Router> */}
+          {/* <Route path="/" element={<AuthMain />} /> */}
+<RouterProvider router={BrowserRouter}></RouterProvider>
     </div>
   );
 }

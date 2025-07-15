@@ -1,29 +1,41 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, AlertCircle, Github } from 'lucide-react';
 import Loading from '../Loding';
+import { webSocketContext } from '../../context/UserContext';
+// import { WebSocket } from 'websocket-client';
+import axios from 'axios';
 
 export default function SignUp() {
+
+  const { serverUrl } = useContext(webSocketContext)
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    fullName: '',
+    username: '',
     email: '',
     password: '',
     agree: false
   });
 
+  // console.log(formData);
+
+
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState("baby i am bad");
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({ ...formData, [name]: type === 'checkbox' ? checked : value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    
+
 
     if (!formData.agree) {
       setError('You must agree to the terms first.');
@@ -32,17 +44,52 @@ export default function SignUp() {
 
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      console.log(formData);
-      setIsSubmitting(false);
-      navigate('/signin');
-    }, 1500);
+    try {
+
+      const registerResponse = await axios.post(`${serverUrl}/register`, formData, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true
+      })
+
+
+      // useEffect(() => {
+      //   if (success) {
+      //     const timer = setTimeout(() => {
+      //       setSuccess("User Register Successfully");
+      //     }, 2000);
+      //     return () => clearTimeout(timer);
+      //   }
+      // }, [success]);
+
+
+      if (registerResponse.status === 200) {
+        setSuccess("User Register Successfully");
+
+        setTimeout(() => {
+          console.log(formData);
+          setIsSubmitting(false);
+          navigate('/signin');
+        }, 3000);
+      }
+
+      console.log(registerResponse.data);
+
+    } catch (error) {
+      setError(error)
+    }
+
+
+
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-purple-100 to-white px-4 py-8">
       <div className="w-full max-w-md bg-white shadow-md rounded-xl p-5 space-y-5 relative">
         <div className="text-center space-y-3">
+          {success && <h1 className="text-green-600 font-semibold text-lg">{success}</h1>}
+
           <Link to="/" className="inline-block">
             <h2 className="text-2xl font-bold text-purple-900">ChatLock</h2>
           </Link>
@@ -62,8 +109,8 @@ export default function SignUp() {
             <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
             <input
               type="text"
-              name="fullName"
-              value={formData.fullName}
+              name="username"
+              value={formData.username}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-purple-500 text-sm"
               placeholder="John Doe"
@@ -158,7 +205,7 @@ export default function SignUp() {
         <div className="grid grid-cols-2 gap-3">
           <button
             disabled={isSubmitting}
-            onClick={() => {}}
+            onClick={() => { }}
             className="flex items-center justify-center border border-gray-300 rounded-md p-2 hover:bg-gray-50 text-sm"
           >
             <img src="https://img.icons8.com/color/24/google-logo.png" alt="Google" className="w-4 h-4" />
@@ -167,7 +214,7 @@ export default function SignUp() {
 
           <button
             disabled={isSubmitting}
-            onClick={() => {}}
+            onClick={() => { }}
             className="flex items-center justify-center border border-gray-300 rounded-md p-2 hover:bg-gray-50 text-sm"
           >
             <Github className="w-4 h-4" />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Bell,
   Home,
@@ -12,6 +12,12 @@ import {
   X
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import axios from 'axios'
+// import { profileData } from '../../data/Data.jsx'
+// console.log(profileData);
+
+
+
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -20,6 +26,8 @@ function Header() {
   const [searchQuery, setSearchQuery] = useState('')
   const searchRef = useRef(null)
   const profileRef = useRef(null)
+  const navigate = useNavigate();
+
 
   // Close menus when clicking outside
   useEffect(() => {
@@ -74,6 +82,26 @@ function Header() {
     setIsSearchFocused(false)
   }
 
+  const handleLogout = async () => {
+
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/logout",
+      {}, // empty body
+      { withCredentials: true } // config object as third param
+    );
+
+    console.log("User logged out successfully");
+
+    if (response.status === 200) {
+      navigate("/signin");
+    }
+  } catch (error) {
+    console.error("Logout failed:", error.response?.data || error.message);
+    // Optionally show toast or error message to user
+  }
+};
+
   const navItems = [
     { icon: Home, label: 'Home', path: '/feed' },
     { icon: MessageCircle, label: 'Messages', path: '/messages' },
@@ -87,6 +115,16 @@ function Header() {
     { icon: Settings, label: 'Settings', action: () => console.log('Settings') },
     { icon: LogOut, label: 'Log out', action: () => console.log('Logout'), isDestructive: true }
   ]
+
+const handelData = async()=>{
+  await axios.get(`${serverUr}/profile`);
+
+}
+
+ const data = {
+handelData
+}
+console.log(data);
 
   return (
     <header className="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
@@ -277,10 +315,18 @@ function Header() {
                   )}
                 </Link>
               ))}
-              <button className="flex items-center w-full px-3 py-3 text-base font-medium text-red-600 hover:bg-gray-50 rounded-lg transition-colors">
-                <LogOut className="mr-3 h-5 w-5" />
+              {/* <button onClick={handleLogout} className="flex items-center w-full px-3 py-3 text-base font-medium text-red-600 hover:bg-gray-50 rounded-lg transition-colors">
+                <LogOut className="mr-3 h-5 w-5"  />
                 Log out
-              </button>
+              </button> */}
+
+                <button
+                          onClick={handleLogout}
+                          className="flex items-center gap-3 w-full px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200"
+                        >
+                          <LogOut size={20} />
+                          <span className="text-sm font-medium">Logout</span>
+                        </button>
             </div>
           </motion.div>
         )}

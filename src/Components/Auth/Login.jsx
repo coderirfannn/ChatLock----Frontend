@@ -1,28 +1,60 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { AlertCircle, Github } from "lucide-react"
 import Loading from "../Loding"
-import { Link } from "react-router-dom"
+import { Link, redirect, useNavigate } from "react-router-dom"
+import axios from "axios"
+import { webSocketContext } from "../../context/UserContext"
 
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+
+  const { serverUrl } = useContext(webSocketContext)
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
 
   const onSubmit = async (e) => {
     e.preventDefault()
     setError("")
 
-    if (!email || !password) {
+    if (!formData.email || !formData.password) {
       setError("Please fill in all fields")
       return
     }
 
+    if(!formData.password) return setError("Password not match !")
+
     try {
       setIsLoading(true)
-      await new Promise((resolve) => setTimeout(resolve, 1000)) // Simulated login
-      window.location.href = "/feed"
+   
+      const loginResponese = await axios.post(`${serverUrl}/login`, formData, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true
+      })
+      console.log(loginResponese.data);
+
+      // if(loginResponese.headers){
+        navigate('/')
+      // }else{
+      //   setError("Please try again")
+      // }
+
+
+
+
     } catch (err) {
       setError("Invalid email or password")
     } finally {
@@ -61,9 +93,10 @@ export default function Login() {
             <input
               id="email"
               type="email"
+              name="email"
               placeholder="name@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={formData.email}
+              onChange={handleChange}
               disabled={isLoading}
               required
               className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -82,8 +115,9 @@ export default function Login() {
             <input
               id="password"
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
               disabled={isLoading}
               required
               className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -117,7 +151,7 @@ export default function Login() {
         <div className="grid grid-cols-2 gap-4">
           <button
             disabled={isLoading}
-            onClick={() => {}}
+            onClick={() => { }}
             className="flex items-center justify-center border border-gray-300 rounded-md p-2 hover:bg-gray-50"
           >
             <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
@@ -132,7 +166,7 @@ export default function Login() {
 
           <button
             disabled={isLoading}
-            onClick={() => {}}
+            onClick={() => { }}
             className="flex items-center justify-center border border-gray-300 rounded-md p-2 hover:bg-gray-50"
           >
             <Github className="mr-2 h-4 w-4" />
