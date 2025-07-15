@@ -16,7 +16,7 @@ const InstagramPost = () => {
   // Sample data
   const post = {
     user: {
-      username: 'traveler_jane',
+      username: 'trfaveler_jane',
       fullName: 'Jane Doe',
       avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
       isVerified: true
