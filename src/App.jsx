@@ -1,9 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 
-import AuthMain from './Components/Auth/Authmain';
 import SignUp from './components/Auth/SignUp';
-
+import Authmain from './Components/Auth/Authmain'
 import Login from './Components/Auth/Login';
 import MainLayout from './pages/MainLayout';
 import { Home } from './pages/Home';
@@ -21,7 +20,7 @@ const BrowserRouter = createBrowserRouter([
   },
      {
     path:'/auth',
-    element:<AuthMain></AuthMain>
+    element:<Authmain></Authmain>
    },
    {
     path:'/signin',
