@@ -7,7 +7,7 @@ import Authmain from './Components/Auth/Authmain'
 import Login from './Components/Auth/Login';
 import Mainlayout from './pages/Mainlayout';
 import { Home } from './pages/Home';
-import Signup from './components/Auth/SignUp';
+import Signup from './components/Auth/Signup';
 
 const BrowserRouter = createBrowserRouter([
   {
