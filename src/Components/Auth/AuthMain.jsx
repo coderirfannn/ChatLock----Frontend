@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Loading from '../Loding';
 
 
-function AuthMain() {
+function Authmain() {
   const [isLoading, setIsLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const navigate = useNavigate();
@@ -125,4 +125,4 @@ function AuthMain() {
   );
 }
 
-export default AuthMain;
+export default Authmain;
