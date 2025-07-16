@@ -39,7 +39,7 @@ function App() {
       {/* <Router>
         <Routes>
           <Route path="/" element={<AuthMain />} />
-          <Route path="/signin" element={<Login />} />
+          <Route path="/sigdnin" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="*" element={<NotFound />} />
