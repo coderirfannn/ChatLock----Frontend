@@ -1,13 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 
-// import Feed from './Components/Feed/Feed';
-// import ProtectedRoute from './Components/Auth/ProtectedRoute';
-import NotFound from './components/Common/NotFound';
 import AuthMain from './components/Auth/AuthMain';
 import SignUp from './components/Auth/SignUp';
-import Feed from './pages/Feed';
-import { LogIn } from 'lucide-react';
+
 import Login from './Components/Auth/Login';
 import MainLayout from './pages/MainLayout';
 import { Home } from './pages/Home';
