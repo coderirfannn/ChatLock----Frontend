@@ -6,7 +6,7 @@ import { webSocketContext } from '../../context/UserContext';
 // import { WebSocket } from 'websocket-client';
 import axios from 'axios';
 
-export default function SignUp() {
+export default function Signup() {
 
   const { serverUrl } = useContext(webSocketContext)
 
