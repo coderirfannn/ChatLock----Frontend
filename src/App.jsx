@@ -2,11 +2,11 @@ import { BrowserRouter as Router, Routes, Route, createBrowserRouter, RouterProv
 import './App.css';
 
 import Authmain from './Components/Auth/Authmain';
-import SignUp from './components/Auth/SignUp';
 
 import Login from './Components/Auth/Login';
 import MainLayout from './pages/MainLayout';
 import { Home } from './pages/Home';
+import Signup from './components/Auth/SignUp';
 
 const BrowserRouter = createBrowserRouter([
   {
@@ -29,8 +29,7 @@ const BrowserRouter = createBrowserRouter([
    },
    {
     path:'/signup',
-    element:<SignUp></SignUp>
-   }
+    element:<Signup></Signup>
 ])
 
 function App() {
