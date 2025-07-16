@@ -7,10 +7,10 @@ export const ContextProvider = (({children}) => {
 
     // const socketRef = useRef(null) // store socket instance
 
-    const serverUrl = "http://localhost:3000"
+    const serverUrl = "https://chat-lock-backend-m3wwhfymg-mohdirfan70097-gmailcoms-projects.vercel.app"
 
     const value = {
-        // socketRef,
+       
         serverUrl
     }
 
