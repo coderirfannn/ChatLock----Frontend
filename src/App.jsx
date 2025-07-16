@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 
-import AuthMain from './components/Auth/AuthMain';
+import AuthMain from './Components/Auth/Authmain';
 import SignUp from './components/Auth/SignUp';
 
 import Login from './Components/Auth/Login';
